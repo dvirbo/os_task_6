@@ -65,4 +65,6 @@ int main(int argc, char *argv[])
 /*
  how to run: g++ -std=c++11 guard.cpp -lpthread -o guard
 source: https://github.com/secp256/code/blob/5c4e6093ba75b6f8c1438e83b01144d712067efd/cpp/test/a.cpp
+
+part b: https://www.geeksforgeeks.org/strtok-strtok_r-functions-c-examples/
 */

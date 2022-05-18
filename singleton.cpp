@@ -1,13 +1,8 @@
-#include <cstdlib>
-#include <iostream>
 #include "singleton.hpp"
-
-using namespace std;
 
 LoadBalancer::LoadBalancer()
 {
 }
-
 
 LoadBalancer *LoadBalancer::Instance()
 {
@@ -20,16 +15,40 @@ LoadBalancer *LoadBalancer::Instance()
     return single;
 }
 
-
-
 void LoadBalancer::Destroy()
 {
-     if (single != NULL)
+    if (single != NULL)
     {
         std::lock_guard<std::mutex> lo(mutex_);
         if (single != NULL)
-            delete(single);
+            delete (single);
     }
+}
+/*
+ * It will iterate through all the lines in file and
+ * put them in given vector
+ */
+bool LoadBalancer::getFileContent(string fileName, vector<string> &vecOfStrs)
+{
+    // Open the File
+    std::ifstream in(fileName.c_str());
+    // Check if object is valid
+    if (!in)
+    {
+        std::cerr << "Cannot open the File : " << fileName << endl;
+        return false;
+    }
+    string str;
+    // Read the next line from File untill it reaches the end.
+    while (getline(in, str))
+    {
+        // Line contains string of length > 0 then save it in vector
+        if (str.size() > 0)
+            vecOfStrs.push_back(str);
+    }
+    // Close The File
+    in.close();
+    return true;
 }
 
 int main()
@@ -42,8 +61,14 @@ int main()
     {
         std::cout << "Same instance" << endl;
     }
+    bool result = LoadBalancer::getFileContent("text.txt", lb1->vecOfStrs);
 
-    // need to map file to vector "text" for checking
+    if (result)
+    {
+        // Print the vector contents
+        for (std::string &line : lb1->vecOfStrs)
+            std::cout << line << std::endl;
+    }
     // need to create makefile
 
     return 0;

@@ -7,6 +7,11 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
+
 
 using namespace std;
 
@@ -14,18 +19,16 @@ class LoadBalancer
 {
 private:
     static LoadBalancer *single;
-    LoadBalancer();
+    LoadBalancer(); // need to implement distractor.. ~
+    ~LoadBalancer(); // need to implement distractor.. ~
     static std::mutex mutex_;
+
 
 public:
      vector<string> vecOfStrs;
+     int fd;
     static LoadBalancer *Instance(); // return pointer to singlton
     void Destroy();
    static bool getFileContent(std::string fileName, vector<string> &vecOfStrs);
 };
 
-/* Singleton Pattern Example with POSIX Threads Programming:
-    https://gist.github.com/firatakandere/8a19678bf4a36bc6d3a9#file-loadbalancer-h
-read a file line by line into a vector:
-     https://thispointer.com/c-how-to-read-a-file-line-by-line-into-a-vector/
-*/

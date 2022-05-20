@@ -1,4 +1,7 @@
 #include "singleton.hpp"
+#include <sys/stat.h>
+
+#define END '\0'
 
 LoadBalancer::LoadBalancer()
 {
@@ -24,32 +27,11 @@ void LoadBalancer::Destroy()
             delete (single);
     }
 }
-/*
- * It will iterate through all the lines in file and
- * put them in given vector
- */
-bool LoadBalancer::getFileContent(string fileName, vector<string> &vecOfStrs)
+LoadBalancer::~LoadBalancer()
 {
-    // Open the File
-    std::ifstream in(fileName.c_str());
-    // Check if object is valid
-    if (!in)
-    {
-        std::cerr << "Cannot open the File : " << fileName << endl;
-        return false;
-    }
-    string str;
-    // Read the next line from File untill it reaches the end.
-    while (getline(in, str))
-    {
-        // Line contains string of length > 0 then save it in vector
-        if (str.size() > 0)
-            vecOfStrs.push_back(str);
-    }
-    // Close The File
-    in.close();
-    return true;
+    Destroy();
 }
+
 
 int main()
 {
@@ -61,15 +43,33 @@ int main()
     {
         std::cout << "Same instance" << endl;
     }
-    bool result = LoadBalancer::getFileContent("text.txt", lb1->vecOfStrs);
 
-    if (result)
+    lb1->fd = open("./text.txt", O_RDWR, S_IRUSR | S_IWUSR);
+
+    if (lb1->fd == -1)
     {
-        // Print the vector contents
-        for (std::string &line : lb1->vecOfStrs)
-            std::cout << line << std::endl;
+        printf("error: % d\n", errno);
+        perror("fali");
     }
-    // need to create makefile
+    struct stat sb;
+    if (fstat(lb1->fd, &sb) == -1)
+    {
+        perror("couldn't get file size.\n");
+    }
+
+    char *file_in_memory = (char *)mmap(NULL, sb.st_size, PROT_READ, MAP_PRIVATE, lb1->fd, 0); // map file to memory
+    close(lb1->fd);
+
+    if (lb1->fd == lb2->fd && lb2->fd == lb3->fd)
+    {
+        std::cout << "pass" << endl;
+    }
+    else
+    {
+        std::cout << "fail" << endl;
+    }
+
+    // i want to check if i can read from the file with other fd (lb2 or lb3..) --> than i can say that this is singelton
 
     return 0;
 }

@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May 29 21:29:26 2022
+# Make data base, printed on Mon May 30 13:01:13 2022
 
 # Variables
 
@@ -30,14 +30,23 @@ VSCODE_LOG_NATIVE = false
 CURDIR := /home/dvirb/os_task_6
 # makefile
 SHELL = /bin/sh
+# makefile (from 'Makefile', line 7)
+RM = rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
 _ = /home/dvirb/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/node
-# makefile (from 'makefile', line 1)
-MAKEFILE_LIST :=  makefile
+# makefile (from 'Makefile', line 1)
+ 
+make: *** No rule to make target 'main.cpp', needed by 'main.exe'.  Stop.
+
+MAKEFILE_LIST :=  Makefile
 # 'override' directive
 GNUMAKEFLAGS := 
+# makefile (from 'Makefile', line 15)
+SOURCES = $(MAIN)
+# makefile (from 'Makefile', line 6)
+CXXFLAGS = -std=c++2a
 # environment
 XDG_DATA_DIRS = /usr/local/share:/usr/share:/var/lib/snapd/desktop
 # environment
@@ -51,7 +60,7 @@ PATH = /home/dvirb/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/b
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-576c747b-9054-413a-b72a-00b73e8e15b6.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-99ae0b7f-0635-4814-935b-600af5dae3ae.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # automatic
@@ -87,7 +96,7 @@ MAKE_VERSION := 4.2.1
 # environment
 USER = dvirb
 # makefile
-.DEFAULT_GOAL := clean
+.DEFAULT_GOAL := all
 # environment
 NAME = DESKTOP-MHAH2O2
 # automatic
@@ -106,6 +115,8 @@ MAKEFLAGS = pqrR
 MFLAGS = -pqrR
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
+# makefile (from 'Makefile', line 10)
+MAIN = ./main.cpp
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -116,6 +127,8 @@ VSCODE_HANDLES_SIGPIPE = true
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
+# makefile (from 'Makefile', line 5)
+CXX = clang++-9
 # environment
 LC_ALL = C
 # environment
@@ -124,6 +137,8 @@ HOSTTYPE = x86_64
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
+# makefile (from 'Makefile', line 13)
+MAINEXECUTABLE = $(subst .cpp,,$(MAIN)).exe
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # default
@@ -139,7 +154,7 @@ WSL_DISTRO_NAME = Ubuntu-20.04
 # environment
 MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=64/1024=6%, Rehash=0, Collisions=4/89=4%
+# Load=70/1024=7%, Rehash=0, Collisions=4/103=4%
 
 # Pattern-specific Variable Values
 
@@ -147,9 +162,9 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# . (device 2, inode 150870587516912775): 13 files, no impossibilities.
+# . (device 2, inode 150870587516912775): 12 files, no impossibilities.
 
-# 13 files, no impossibilities in 1 directories.
+# 12 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -157,19 +172,33 @@ MOTD_SHOWN = update-motd
 
 # Files
 
-# Not a target:
-all:
+all: main.exe
 #  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 18):
+	$(MAINEXECUTABLE)
+
+main.exe: main.cpp
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 21):
+	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(MAINEXECUTABLE)
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-30 13:00:52.4070655
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+main.cpp:
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has not been updated.
-
-# Not a target:
-makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-17 15:39:45.7765044
-#  File has been updated.
-#  Successfully updated.
 
 # Not a target:
 .DEFAULT:
@@ -181,25 +210,30 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'makefile', line 2):
-	rm -rf *.o guard
+#  recipe to execute (from 'Makefile', line 27):
+	$(RM) *.exe a.out *.class singleton.exe
+
+valgrind:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 24):
+	valgrind --tool=memcheck $(MAINEXECUTABLE)
 
 # files hash-table stats:
-# Load=5/1024=0%, Rehash=0, Collisions=0/15=0%
+# Load=8/1024=1%, Rehash=0, Collisions=0/22=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 19 / storage = 179 B / avg = 9 B
-# current buf: size = 8162 B / used = 179 B / count = 19 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 21 / storage = 192 B / avg = 9 B
+# current buf: size = 8162 B / used = 192 B / count = 21 / avg = 9 B
 
-# strcache performance: lookups = 24 / hit rate = 20%
+# strcache performance: lookups = 31 / hit rate = 32%
 # hash-table stats:
-# Load=19/8192=0%, Rehash=0, Collisions=1/24=4%
-# Finished Make data base on Sun May 29 21:29:26 2022
+# Load=21/8192=0%, Rehash=0, Collisions=1/31=3%
+# Finished Make data base on Mon May 30 13:01:13 2022
 
  
-make: *** No rule to make target 'all'.  Stop.
-

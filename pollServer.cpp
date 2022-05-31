@@ -19,9 +19,10 @@
 
 #define PORT "9034" // Port we're listening on
 #define MAXLEN 1024
+
 struct pollfd *pfds; // Data structure describing a polling request.
 int listener;        // Listening socket descriptor
-char buf[256];       // Buffer for client data
+char buf[MAXLEN];       // Buffer for client data
 int fd_count = 0;    // connection counter in struct pollfd
 
 // Get sockaddr, IPv4 or IPv6:

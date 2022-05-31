@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon May 30 13:01:13 2022
+# Make data base, printed on Tue May 31 17:23:59 2022
 
 # Variables
 
@@ -30,27 +30,20 @@ VSCODE_LOG_NATIVE = false
 CURDIR := /home/dvirb/os_task_6
 # makefile
 SHELL = /bin/sh
-# makefile (from 'Makefile', line 7)
-RM = rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
 _ = /home/dvirb/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/node
 # makefile (from 'Makefile', line 1)
- 
-make: *** No rule to make target 'main.cpp', needed by 'main.exe'.  Stop.
-
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
 GNUMAKEFLAGS := 
-# makefile (from 'Makefile', line 15)
-SOURCES = $(MAIN)
-# makefile (from 'Makefile', line 6)
-CXXFLAGS = -std=c++2a
 # environment
 XDG_DATA_DIRS = /usr/local/share:/usr/share:/var/lib/snapd/desktop
 # environment
 VSCODE_VERBOSE_LOGGING = true
+# makefile (from 'Makefile', line 2)
+CPP = g++
 # environment
 VSCODE_CWD = /mnt/c/Users/Dvir/AppData/Local/Programs/Microsoft VS Code
 # default
@@ -60,7 +53,7 @@ PATH = /home/dvirb/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/b
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-99ae0b7f-0635-4814-935b-600af5dae3ae.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-6e15c113-c0c2-4194-a73d-1de965a4199e.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # automatic
@@ -115,8 +108,6 @@ MAKEFLAGS = pqrR
 MFLAGS = -pqrR
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
-# makefile (from 'Makefile', line 10)
-MAIN = ./main.cpp
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -127,8 +118,8 @@ VSCODE_HANDLES_SIGPIPE = true
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
-# makefile (from 'Makefile', line 5)
-CXX = clang++-9
+# makefile (from 'Makefile', line 1)
+CXX = gcc
 # environment
 LC_ALL = C
 # environment
@@ -137,8 +128,6 @@ HOSTTYPE = x86_64
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
-# makefile (from 'Makefile', line 13)
-MAINEXECUTABLE = $(subst .cpp,,$(MAIN)).exe
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # default
@@ -154,7 +143,7 @@ WSL_DISTRO_NAME = Ubuntu-20.04
 # environment
 MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=70/1024=7%, Rehash=0, Collisions=4/103=4%
+# Load=66/1024=6%, Rehash=0, Collisions=4/91=4%
 
 # Pattern-specific Variable Values
 
@@ -162,9 +151,9 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# . (device 2, inode 150870587516912775): 12 files, no impossibilities.
+# . (device 2, inode 150870587516912775): 22 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 22 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -172,33 +161,72 @@ MOTD_SHOWN = update-motd
 
 # Files
 
-all: main.exe
+all: singleton pollServer pollClient guard
+#  Phony target (prerequisite of .PHONY).
 #  Command line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 18):
-	$(MAINEXECUTABLE)
+#  File has been updated.
+#  Successfully updated.
 
-main.exe: main.cpp
+.PHONY: all clean
 #  Implicit rule search has not been done.
-#  File does not exist.
+#  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 21):
-	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(MAINEXECUTABLE)
+
+pollServer.o: pollServer.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-31 17:23:41.770449
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 18):
+	$(CPP) -c pollServer.cpp
+
+pollServer: pollServer.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-31 17:23:43.0150596
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 16):
+	$(CPP) pollServer.cpp reactor.cpp -o pollServer -pthread -lpthread 
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-30 13:00:52.4070655
+#  Last modified 2022-05-31 17:23:18.4370625
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
-main.cpp:
+guard.cpp:
 #  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
+#  Last modified 2022-05-17 16:20:44.0349373
+#  File has been updated.
+#  Successfully updated.
+
+singleton: singleton.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-31 17:23:41.2254595
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 12):
+	$(CPP) singleton.o -o singleton
+
+singleton.o: singleton.cpp
+#  Implicit rule search has not been done.
+ 
+#  Last modified 2022-05-31 17:23:41.0671671
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 14):
+	$(CPP) -c singleton.cpp
+
+# Not a target:
+pollClient.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-31 16:59:40.3531329
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 .DEFAULT:
@@ -207,33 +235,73 @@ main.cpp:
 #  File has not been updated.
 
 clean:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 27):
-	$(RM) *.exe a.out *.class singleton.exe
+#  recipe to execute (from 'Makefile', line 26):
+	rm -f *.o main1 guard singleton pollServer pollClient ao_client test_ao_client
 
-valgrind:
+guard: guard.o
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 24):
-	valgrind --tool=memcheck $(MAINEXECUTABLE)
+#  Last modified 2022-05-31 17:23:43.7990695
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 8):
+	$(CPP) guard.o -o guard -lpthread
+
+# Not a target:
+pollServer.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-30 17:03:34.3821431
+#  File has been updated.
+#  Successfully updated.
+
+guard.o: guard.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-31 17:23:43.6451501
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 10):
+	$(CPP) -c guard.cpp
+
+# Not a target:
+singleton.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-30 15:07:33.3836725
+#  File has been updated.
+#  Successfully updated.
+
+pollClient.o: pollClient.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-31 17:23:43.2318515
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 22):
+	$(CPP) -c pollClient.cpp
+
+pollClient: pollClient.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-31 17:23:43.5207053
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 20):
+	$(CPP) pollClient.cpp -o pollClient -lpthread
 
 # files hash-table stats:
-# Load=8/1024=1%, Rehash=0, Collisions=0/22=0%
+# Load=18/1024=2%, Rehash=0, Collisions=0/52=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 21 / storage = 192 B / avg = 9 B
-# current buf: size = 8162 B / used = 192 B / count = 21 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 29 / storage = 290 B / avg = 10 B
+# current buf: size = 8162 B / used = 290 B / count = 29 / avg = 10 B
 
-# strcache performance: lookups = 31 / hit rate = 32%
+# strcache performance: lookups = 67 / hit rate = 56%
 # hash-table stats:
-# Load=21/8192=0%, Rehash=0, Collisions=1/31=3%
-# Finished Make data base on Mon May 30 13:01:13 2022
+# Load=29/8192=0%, Rehash=0, Collisions=1/67=1%
+# Finished Make data base on Tue May 31 17:23:59 2022
 
  

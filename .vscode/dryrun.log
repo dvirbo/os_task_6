@@ -1,6 +1,5 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory '/home/dvirb/os_task_6'
+make: Nothing to be done for 'all'.
 make: Leaving directory '/home/dvirb/os_task_6'
  
-make: *** No rule to make target 'main.cpp', needed by 'main.exe'.
-

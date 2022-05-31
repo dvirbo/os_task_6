@@ -1,27 +1,26 @@
-# A generic makefile for running single-file C++ projects.
-#
-# AUTHOR: Erel Segal-Halevi
+CXX=gcc
+CPP=g++
 
-CXX=clang++-9
-CXXFLAGS=-std=c++2a
-RM=rm -f
 
-ifndef MAIN
-  MAIN=./main.cpp
-endif
+all: singleton pollServer pollClient guard
 
-MAINEXECUTABLE=$(subst .cpp,,$(MAIN)).exe
+guard: guard.o
+	$(CPP) guard.o -o guard -lpthread
+guard.o: guard.cpp
+	$(CPP) -c guard.cpp
+singleton: singleton.o
+	$(CPP) singleton.o -o singleton
+singleton.o: singleton.cpp
+	$(CPP) -c singleton.cpp
+pollServer: pollServer.o 
+	$(CPP) pollServer.cpp reactor.cpp -o pollServer -pthread -lpthread 
+pollServer.o: pollServer.cpp
+	$(CPP) -c pollServer.cpp
+pollClient: pollClient.o
+	$(CPP) pollClient.cpp -o pollClient -lpthread
+pollClient.o: pollClient.cpp
+	$(CPP) -c pollClient.cpp
 
-SOURCES=$(MAIN)
-
-all: $(MAINEXECUTABLE)
-	$(MAINEXECUTABLE)
-
-$(MAINEXECUTABLE): $(SOURCES) $(HEADERS)
-	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(MAINEXECUTABLE)
-
-valgrind:
-	valgrind --tool=memcheck $(MAINEXECUTABLE)
-
+.PHONY: all clean
 clean:
-	$(RM) *.exe a.out *.class singleton.exe
+	rm -f *.o main1 guard singleton pollServer pollClient ao_client test_ao_client

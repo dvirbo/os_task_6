@@ -38,7 +38,7 @@ void *pollsend(void *args)
             connectStatus = false;
             break;
         }
-
+        printf("enter..\n");
         bzero(buff, 1024);
     }
     return NULL;
@@ -70,27 +70,31 @@ void *pollrecv(void *args)
 
 int main()
 {
+    printf("Initilize chat\n");
     sockD = socket(AF_INET, SOCK_STREAM, 0);
     if (sockD == -1)
     {
-        printf("create socket failed\n");
-        exit(1);
+        perror("socket");
+        return -1;
     }
-    struct sockaddr_in servAddr;
-    servAddr.sin_family = AF_INET;
-    servAddr.sin_port = htons(3490);
-    servAddr.sin_addr.s_addr = inet_addr(SERVER_IP_ADDRESS);
+    struct sockaddr_in serverAddress;
+    memset(&serverAddress, 0, sizeof(serverAddress));
 
-    int check_connect = connect(sockD, (struct sockaddr *)&servAddr, sizeof(servAddr));
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_port = htons(9034);
+    serverAddress.sin_addr.s_addr = inet_addr(SERVER_IP_ADDRESS);
 
-    if (check_connect == ERR)
+    int clientSocket = connect(sockD, (struct sockaddr *)&serverAddress, sizeof(serverAddress));
+    if (clientSocket == -1)
     {
-        printf("connected failed\n");
-        exit(1);
+        printf("listen failed");
+        close(sockD);
+        return -1;
     }
     connectStatus = true;
     pthread_t _recv;
     pthread_t _send;
+
     pthread_create(&_recv, NULL, pollrecv, NULL);
     pthread_create(&_send, NULL, pollsend, NULL);
     pthread_join(_send, NULL); // until the recive finish

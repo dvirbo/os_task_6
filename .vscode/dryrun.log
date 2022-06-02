@@ -1,5 +1,12 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/dvirb/os_task_6'
-make: Nothing to be done for 'all'.
+g++ -c singleton.cpp
+g++ singleton.o -o singleton
+g++ -c pollServer.cpp
+g++ pollServer.cpp reactor.cpp -o pollServer -pthread -lpthread 
+g++ -c pollClient.cpp
+g++ pollClient.cpp -o pollClient -lpthread
+g++ -c guard.cpp
+g++ guard.o -o guard -lpthread
 make: Leaving directory '/home/dvirb/os_task_6'
  

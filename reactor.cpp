@@ -1,24 +1,32 @@
 #include "reactor.hpp"
-
+/*
+create new reactor
+*/
 preactor newReactor()
 {
-    preactor rec = (preactor)malloc(sizeof(reactor));
+    preactor rec = new reactor();
     return rec;
 }
+/*
+create now request and and call the func that in client to handle the request
+*/
 
-void InstallHandler(preactor p_reactor, void *(func)(void *), int file_des)
+void InstallHandler(preactor pr, void *(func)(void *), int fd)
 {
-    preqests p_reqests = (preqests)malloc(sizeof(reqests));
-    p_reqests->_fd = file_des;
-    p_reqests->p_reactor = p_reactor;
-    p_reactor->func = func;
-    p_reactor->_fd = file_des;
-    pthread_create(&(p_reactor->_id), NULL, func, p_reqests);
+    preqests p_reqests = new reqests();
+    p_reqests->_fd = fd;
+    p_reqests->ptreactor = pr;
+    pr->func = func;
+    pr->_fd = fd;
+    pthread_create(&(pr->_id), NULL, func, p_reqests);
 }
-
-void RemoveHandler(preactor p_reactor, int fd_free)
+/*
+delete (deallocate) the reactor 
+not is used cause i do in manualy in the code using vector that contain all the preactor that create 
+and 'free' also the fd in the 'pollhandler' that inside client
+*/
+void RemoveHandler(preactor pr, int fd)
 {
-    pthread_join(p_reactor->_id, NULL);
-    p_reactor->_fd = -1;
-    p_reactor->func = nullptr;
+    pr->_fd = -1;
+    delete pr;
 }

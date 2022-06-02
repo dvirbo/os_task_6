@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue May 31 17:23:59 2022
+# Make data base, printed on Thu Jun  2 12:30:17 2022
 
 # Variables
 
@@ -53,7 +53,7 @@ PATH = /home/dvirb/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/b
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-6e15c113-c0c2-4194-a73d-1de965a4199e.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-bc929f93-45ed-44ec-a053-468182ba6e41.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # automatic
@@ -71,7 +71,7 @@ HOME = /home/dvirb
 # environment
 LOGNAME = dvirb
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -143,7 +143,7 @@ WSL_DISTRO_NAME = Ubuntu-20.04
 # environment
 MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=66/1024=6%, Rehash=0, Collisions=4/91=4%
+# Load=66/1024=6%, Rehash=0, Collisions=4/95=4%
 
 # Pattern-specific Variable Values
 
@@ -151,9 +151,9 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# . (device 2, inode 150870587516912775): 22 files, no impossibilities.
+# . (device 2, inode 150870587516912775): 14 files, no impossibilities.
 
-# 22 files, no impossibilities in 1 directories.
+# 14 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -167,7 +167,9 @@ all: singleton pollServer pollClient guard
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
 
 .PHONY: all clean
 #  Implicit rule search has not been done.
@@ -176,19 +178,23 @@ all: singleton pollServer pollClient guard
 
 pollServer.o: pollServer.cpp
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-31 17:23:41.770449
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 18):
 	$(CPP) -c pollServer.cpp
 
 pollServer: pollServer.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-31 17:23:43.0150596
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 16):
 	$(CPP) pollServer.cpp reactor.cpp -o pollServer -pthread -lpthread 
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 Makefile:
@@ -199,34 +205,52 @@ Makefile:
 
 # Not a target:
 guard.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-17 16:20:44.0349373
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 singleton: singleton.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-31 17:23:41.2254595
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
 #  recipe to execute (from 'Makefile', line 12):
 	$(CPP) singleton.o -o singleton
 
 singleton.o: singleton.cpp
 #  Implicit rule search has not been done.
- 
-#  Last modified 2022-05-31 17:23:41.0671671
+#  Implicit/static pattern stem: ''
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := singleton.o
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := singleton.cpp
+# automatic
+# | := 
+# automatic
+# < := singleton.cpp
+# automatic
+# ^ := singleton.cpp
+# automatic
+# ? := singleton.cpp
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
 #  recipe to execute (from 'Makefile', line 14):
 	$(CPP) -c singleton.cpp
 
 # Not a target:
 pollClient.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-31 16:59:40.3531329
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -244,24 +268,21 @@ clean:
 
 guard: guard.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-31 17:23:43.7990695
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 8):
 	$(CPP) guard.o -o guard -lpthread
 
 # Not a target:
 pollServer.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-30 17:03:34.3821431
-#  File has been updated.
-#  Successfully updated.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 guard.o: guard.cpp
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-31 17:23:43.6451501
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 10):
 	$(CPP) -c guard.cpp
 
@@ -274,22 +295,20 @@ singleton.cpp:
 
 pollClient.o: pollClient.cpp
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-31 17:23:43.2318515
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 22):
 	$(CPP) -c pollClient.cpp
 
 pollClient: pollClient.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-31 17:23:43.5207053
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 20):
 	$(CPP) pollClient.cpp -o pollClient -lpthread
 
 # files hash-table stats:
-# Load=18/1024=2%, Rehash=0, Collisions=0/52=0%
+# Load=18/1024=2%, Rehash=0, Collisions=0/53=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -299,9 +318,9 @@ pollClient: pollClient.o
 # strcache buffers: 1 (0) / strings = 29 / storage = 290 B / avg = 10 B
 # current buf: size = 8162 B / used = 290 B / count = 29 / avg = 10 B
 
-# strcache performance: lookups = 67 / hit rate = 56%
+# strcache performance: lookups = 60 / hit rate = 51%
 # hash-table stats:
-# Load=29/8192=0%, Rehash=0, Collisions=1/67=1%
-# Finished Make data base on Tue May 31 17:23:59 2022
+# Load=29/8192=0%, Rehash=0, Collisions=1/60=2%
+# Finished Make data base on Thu Jun  2 12:30:17 2022
 
  

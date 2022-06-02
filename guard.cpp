@@ -42,7 +42,7 @@ void *routine(void*)
     counter++;
     printf("%d\n", counter);
     return NULL;
-} // lock end here
+}                                  // lock end here
 
 int main(int argc, char *argv[])
 {

@@ -1,7 +1,6 @@
 
 // source:  https://beej.us/guide/bgnet/html/#slightly-advanced-techniques
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,13 +15,14 @@
 #include <signal.h>
 #include <pthread.h>
 #include "reactor.hpp"
+#include <vector>
 
 #define PORT "9034" // Port we're listening on
 #define MAXLEN 1024
 
 struct pollfd *pfds; // Data structure describing a polling request.
 int listener;        // Listening socket descriptor
-char buf[MAXLEN];       // Buffer for client data
+char buf[MAXLEN];    // Buffer for client data
 int fd_count = 0;    // connection counter in struct pollfd
 
 // Get sockaddr, IPv4 or IPv6:
@@ -149,12 +149,15 @@ void *pollhandler(void *arg)
             }
         }
     }
+    p_reqests->_fd = -1; // check it..
+    delete p_reqests;
     return NULL;
 }
 
 // Main
 int main(void)
 {
+    std::vector<preactor> prList;
 
     int newfd;                          // Newly accept()ed socket descriptor
     struct sockaddr_storage remoteaddr; // Client address
@@ -228,12 +231,21 @@ int main(void)
                                newfd);
 
                         preactor p_reactor = newReactor(); // create new Reactor
+                        prList.push_back(p_reactor);
+                        
                         InstallHandler(p_reactor, &pollhandler, newfd);
+                      //  RemoveHandler(p_reactor, newfd);
                     }
+
                 }
+
             } // END got ready-to-read from poll()
         }     // END looping through file descriptors
     }         // END for(;;)--and you thought it would never end!
+        printf("size of vec is: %zu",prList.size());
+        for(preactor p: prList){  // free all the preactor object
+            delete p;
+        }
 
     return 0;
 }

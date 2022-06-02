@@ -98,7 +98,8 @@ int main()
     pthread_create(&_recv, NULL, pollrecv, NULL);
     pthread_create(&_send, NULL, pollsend, NULL);
     pthread_join(_send, NULL); // until the recive finish
-    pthread_kill(_send, 0);
+
+   // pthread_kill(_send, 0);
 
     close(sockD);
     printf("exit\n");
